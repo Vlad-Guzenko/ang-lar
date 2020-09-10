@@ -1,0 +1,85 @@
+<div class="col-md-6">
+  <h2 class="text-center">Registration</h2>
+  <form [formGroup]="regForm" (ngSubmit)="submit()">
+
+    <div class="form-control">
+      <label for="first_name">First name:</label>
+      <input minlength="2" (keydown.space)="$event.preventDefault();" [ngClass]="{'invalid':regForm.get('first_name').invalid && regForm.get('first_name').touched}" placeholder="name" id="first_name" formControlName="first_name">
+      <span
+        *ngIf="regForm.get('first_name').invalid && regForm.get('first_name').touched"
+        class="helper-text red-text"
+      >
+        Field cannot be empty
+      </span>
+    </div>
+
+    <div class="form-control">
+      <label minlength="2" for="last_name">Last name:</label>
+      <input (keydown.space)="$event.preventDefault();" [ngClass]="{'invalid':regForm.get('last_name').invalid && regForm.get('last_name').touched}" placeholder="surname" id="last_name" formControlName="last_name">
+      <span
+        *ngIf="regForm.get('last_name').invalid && regForm.get('last_name').touched"
+        class="helper-text red-text"
+      >
+        Field cannot be empty
+      </span>
+    </div>
+
+    <div class="form-control">
+      <label for="email">Email:</label>
+      <input
+        minlength="2"
+        (keydown.space)="$event.preventDefault();"
+        [ngClass]="{'invalid':regForm.get('email').invalid && regForm.get('email').touched}"
+        placeholder="email"
+        type="email"
+        id="email"
+        formControlName="email"
+        >
+        <!--[(ngModel)]="emIN"
+        (input)="checkEmail()"-->
+      <span
+        *ngIf="regForm.get('email').invalid && regForm.get('email').touched"
+        class="helper-text red-text"
+      >
+        Enter a correct email address
+      </span>
+    </div>
+
+    <div class="input-field">
+      <input
+        formControlName="password"
+        id="password"
+        type="password"
+        [ngClass]="{'invalid':regForm.get('password').invalid && regForm.get('password').touched}"
+      >
+      <label for="password">Password:</label>
+      <span
+        class="helper-text red-text"
+        *ngIf="regForm.get('password').invalid && regForm.get('password').touched"
+      >
+        <span *ngIf="regForm.get('password').errors['required']">Password field cannot be empty!</span>
+        <span *ngIf="regForm.get('password').errors['minlength'] && regForm.get('password').errors['minlength']['requiredLength']">
+          Password must be at least: {{regForm.get('password').errors['minlength']['requiredLength']}} characters!
+          Now is: {{regForm.get('password').errors['minlength']['actualLength']}}
+        </span>
+      </span>
+    </div>
+
+
+    <div class="form-control">
+      <label for="age">Age:</label>
+      <input (keydown.space)="$event.preventDefault();" [ngClass]="{'invalid':regForm.get('age').invalid && regForm.get('age').touched}" placeholder="age" type="number" min="8" maxlength="3" id="age" formControlName="age">
+      <span
+        *ngIf="regForm.get('age').invalid && regForm.get('age').touched"
+        class="helper-text red-text"
+      >
+        Field cannot be empty
+      </span>
+    </div>
+
+    <button class="btn btn-success" type="submit" [disabled]="regForm.invalid">Register</button>
+    <a class="btn blue" routerLink="/login">Log in</a>
+
+    <!--<p>Form value: {{ addForm.value | json }}</p>-->
+  </form>
+</div>

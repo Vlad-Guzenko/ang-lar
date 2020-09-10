@@ -1,0 +1,71 @@
+<h1>{{empty}}</h1>
+<div class="form-control">
+  <input type="text" placeholder="Search by name, age, email, company name etc..." [(ngModel)]="searchStr">
+  <a class="btn tooltipped" data-position="bottom" data-tooltip="I am a tooltip" [routerLink]="['/contacts', 'new']" class="btn"><i class="material-icons">create</i></a>
+</div>
+<div *ngIf="contacts.length; else loading">
+  <!--<h5>Emails: {{contact.email.length}}</h5>-->
+  <h5>Contacts: {{contacts.length}}</h5>
+
+  <table class="responsive-table centered highlight"
+         *ngIf="!empty; else pt"
+  >
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Имя - Фамилия</th>
+      <th>Почта</th>
+      <th>Должность</th>
+      <th>Компания</th>
+      <th>Возраст</th>
+      <th>Дата создания</th>
+      <th>Дата редактирования</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let contact of contacts | searchContacts:searchStr">
+      <td>{{contact.id}}</td>
+      <td>{{contact.first_name + ' ' + contact.last_name}}</td>
+      <td>{{contact.email}}</td>
+      <!--<td>
+        <select class="browser-default">
+          <option value="{{contact.email}}"></option>
+        </select>
+      </td>-->
+      <td>{{contact.job_title}}</td>
+      <td>{{contact.company_name}}</td>
+      <td>{{contact.age}}</td>
+      <td>{{contact.created_at}}</td>
+      <td>{{contact.updated_at}}</td>
+      <td>
+        <a class="btn green btn-floating pulse" [routerLink]="['/edit/',contact.id]">
+          <i class="material-icons">edit</i>
+        </a>
+        <a class="btn-floating">
+          <i class="red material-icons" (click)="delete(contact.id)">delete</i>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<ng-template class="loader" #pt>
+  <div class="center">
+    <p>No data</p>
+  </div>
+</ng-template>
+<ng-template class="loader" #loading>
+  <div class="progress">
+    <div class="indeterminate"></div>
+  </div>
+</ng-template>
+
+<!--<ul class="pagination">
+  <li *ngFor="let i of getArrayFromNumber(contacts.length); let in = index" class="active">
+    <a (click)="updateIndex(in)">{{in + 1}}</a></li>
+</ul>-->
+
+

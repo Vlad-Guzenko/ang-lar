@@ -1,0 +1,73 @@
+<div class="col-md-6">
+  <h2 class="text-center">User edit</h2>
+  <form [formGroup]="proForm" (ngSubmit)="submit()">
+
+    <div class="form-control">
+      <label for="first_name">Name:</label>
+      <input minlength="2" (keydown.space)="$event.preventDefault();" [ngClass]="{'invalid':proForm.get('first_name').invalid && proForm.get('first_name').touched}" placeholder="name" id="first_name" formControlName="first_name">
+      <span
+        *ngIf="proForm.get('first_name').invalid && proForm.get('first_name').touched"
+        class="helper-text red-text"
+      >
+        Field cannot be empty
+      </span>
+    </div>
+
+    <div class="form-control">
+      <label for="last_name">Last name:</label>
+      <input minlength="2" (keydown.space)="$event.preventDefault();" [ngClass]="{'invalid':proForm.get('last_name').invalid && proForm.get('last_name').touched}" placeholder="surname" id="last_name" formControlName="last_name">
+      <span
+        *ngIf="proForm.get('last_name').invalid && proForm.get('last_name').touched"
+        class="helper-text red-text"
+      >
+        Field cannot be empty
+      </span>
+    </div>
+
+    <div class="form-control">
+      <label for="email">Email:</label>
+      <input
+        minlength="2"
+        (keydown.space)="$event.preventDefault();"
+        [ngClass]="{'invalid':proForm.get('email').invalid && proForm.get('email').touched}"
+        placeholder="email"
+        type="email"
+        id="email"
+        formControlName="email"
+      >
+      <span
+        *ngIf="proForm.get('email').invalid && proForm.get('email').touched"
+        class="helper-text red-text"
+      >
+        Enter a correct email address
+      </span>
+    </div>
+
+    <div class="form-control">
+      <label for="password">Password:</label>
+      <input [ngClass]="{'invalid':proForm.get('password').invalid && proForm.get('password').touched}" type="password" id="password" formControlName="password">
+    </div>
+
+    <div class="form-control">
+      <label for="password2">Password conf:</label>
+      <input [ngClass]="{'invalid':proForm.get('password2').invalid && proForm.get('password2').touched}" type="password" id="password2" formControlName="password2">
+    </div>
+
+    <div class="form-control">
+      <label for="age">Age:</label>
+      <input (keydown.space)="$event.preventDefault();" [ngClass]="{'invalid':proForm.get('age').invalid && proForm.get('age').touched}" placeholder="age" type="number" min="8" maxlength="3" id="age" formControlName="age">
+      <span
+        *ngIf="proForm.get('age').invalid && proForm.get('age').touched"
+        class="helper-text red-text"
+      >
+        Field cannot be empty
+      </span>
+    </div>
+
+    <button class="btn btn-success" type="submit" [disabled]="proForm.invalid||!proForm.dirty">Edit user data</button>
+    <a class="btn blue" routerLink="/contacts">Назад</a>
+
+    <!--<p>Form value: {{ addForm.value | json }}</p>-->
+  </form>
+</div>
+
